@@ -6,21 +6,21 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class YourServiceTest {
+class MyServiceTest {
 
     @Mock
-    private YourRepository yourRepository;
+    private MyRepository myRepository;
 
     @InjectMocks
-    private YourService yourService;
+    private MyService myService;
 
     @Test
     void testSomeMethod() {
         // Mocking the repository behavior
-        Mockito.when(yourRepository.someMethod(Mockito.anyString())).thenReturn("Mocked result");
+        Mockito.when(myRepository.someMethod(Mockito.anyString())).thenReturn("Mocked result");
 
         // Testing the service method
-        String result = yourService.someMethod("input");
+        String result = myService.someMethod("input");
 
         // Asserting the result
         assertEquals("Mocked result", result);
