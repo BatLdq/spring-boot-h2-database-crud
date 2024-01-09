@@ -28,7 +28,12 @@ public class TutorialController {
 
   @Autowired
   TutorialRepository tutorialRepository;
-
+/**
+ * Retrieve all tutorials or filter by title.
+ *
+ * @param title (optional) Filter tutorials by title (case-insensitive).
+ * @return ResponseEntity<List<Tutorial>> containing tutorials or HttpStatus.NO_CONTENT if no tutorials found.
+ */
   @GetMapping("/tutorials")
   public ResponseEntity<List<Tutorial>> getAllTutorials(@RequestParam(required = false) String title) {
     try {
@@ -48,7 +53,12 @@ public class TutorialController {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
-
+/**
+ * Retrieve a tutorial by its ID.
+ *
+ * @param id ID of the tutorial to retrieve.
+ * @return ResponseEntity<Tutorial> containing the tutorial or HttpStatus.NOT_FOUND if not found.
+ */
   @GetMapping("/tutorials/{id}")
   public ResponseEntity<Tutorial> getTutorialById(@PathVariable("id") long id) {
     Optional<Tutorial> tutorialData = tutorialRepository.findById(id);
@@ -59,7 +69,12 @@ public class TutorialController {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
   }
-
+/**
+ * Create a new tutorial.
+ *
+ * @param tutorial Tutorial object containing title, description, and published status.
+ * @return ResponseEntity<Tutorial> containing the created tutorial or HttpStatus.INTERNAL_SERVER_ERROR if an error occurs.
+ */
   @PostMapping("/tutorials")
   public ResponseEntity<Tutorial> createTutorial(@RequestBody Tutorial tutorial) {
     try {
@@ -69,7 +84,13 @@ public class TutorialController {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
-
+/**
+ * Update an existing tutorial by its ID.
+ *
+ * @param id       ID of the tutorial to update.
+ * @param tutorial Tutorial object containing updated title, description, and published status.
+ * @return ResponseEntity<Tutorial> containing the updated tutorial or HttpStatus.NOT_FOUND if the tutorial is not found.
+ */
   @PutMapping("/tutorials/{id}")
   public ResponseEntity<Tutorial> updateTutorial(@PathVariable("id") long id, @RequestBody Tutorial tutorial) {
     Optional<Tutorial> tutorialData = tutorialRepository.findById(id);
@@ -84,7 +105,12 @@ public class TutorialController {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
   }
-
+/**
+ * Delete a tutorial by its ID.
+ *
+ * @param id ID of the tutorial to delete.
+ * @return ResponseEntity<HttpStatus> indicating success (NO_CONTENT) or INTERNAL_SERVER_ERROR if an error occurs.
+ */
   @DeleteMapping("/tutorials/{id}")
   public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") long id) {
     try {
@@ -94,7 +120,11 @@ public class TutorialController {
       return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
-
+/**
+ * Delete all tutorials.
+ *
+ * @return ResponseEntity<HttpStatus> indicating success (NO_CONTENT) or INTERNAL_SERVER_ERROR if an error occurs.
+ */
   @DeleteMapping("/tutorials")
   public ResponseEntity<HttpStatus> deleteAllTutorials() {
     try {
@@ -105,7 +135,11 @@ public class TutorialController {
     }
 
   }
-
+/**
+ * Retrieve tutorials that are published.
+ *
+ * @return ResponseEntity<List<Tutorial>> containing published tutorials or HttpStatus.NO_CONTENT if none found.
+ */
   @GetMapping("/tutorials/published")
   public ResponseEntity<List<Tutorial>> findByPublished() {
     try {
